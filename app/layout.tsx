@@ -1,3 +1,5 @@
+
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -14,8 +16,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -23,6 +27,7 @@ export default function RootLayout({
         <TanStackProvider>
           <Header />
           <main>{children}</main>
+          {modal}
           <Footer />
         </TanStackProvider>
       </body>
