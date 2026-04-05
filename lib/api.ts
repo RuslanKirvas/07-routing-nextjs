@@ -1,13 +1,17 @@
+
+
 import axios from "axios";
 import { Note } from "@/types/note";
 
-const API_BASE_URL = "https://notehub-public.goit.study/api";
+
+const API_BASE_URL = process.env.NODE_ENV === "production" ? "/api" : "https://notehub-public.goit.study/api";
+
 const TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
-    Authorization: `Bearer ${TOKEN}`,
+    ...(TOKEN && { Authorization: `Bearer ${TOKEN}` }),
     "Content-Type": "application/json",
   },
 });
@@ -28,14 +32,8 @@ export interface CreateNoteData {
   title: string;
   content: string;
   tag: string;
-
 }
 
-
-export const fetchNote = async (id: string): Promise<Note> => {
-  const { data } = await axios.get(`/api/notes/${id}`);
-  return data;
-};
 export const fetchNotes = async (
   params: FetchNotesParams = {},
 ): Promise<NotesResponse> => {
@@ -43,7 +41,7 @@ export const fetchNotes = async (
 
   const queryParams: Record<string, string | number> = { page, perPage };
   if (search) queryParams.search = search;
-  if (tag) queryParams.tag = tag; //
+  if (tag) queryParams.tag = tag;
 
   const response = await api.get<NotesResponse>("/notes", {
     params: queryParams,
