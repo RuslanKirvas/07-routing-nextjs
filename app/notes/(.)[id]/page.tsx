@@ -4,13 +4,13 @@ import {
   QueryClient,
 } from '@tanstack/react-query';
 import { fetchNoteById } from '@/lib/api';
-import NotePreview from './NotePreview.client';
+import NotePreview from '@/app/notes/[id]/NotePreview.client';
 
 interface PageProps {
   params: Promise<{ id: string }>;
 }
 
-export default async function NoteModalPage({ params }: PageProps) {
+export default async function InterceptedNotePage({ params }: PageProps) {
   const { id } = await params;
 
   const queryClient = new QueryClient();
@@ -26,3 +26,6 @@ export default async function NoteModalPage({ params }: PageProps) {
     </HydrationBoundary>
   );
 }
+
+
+

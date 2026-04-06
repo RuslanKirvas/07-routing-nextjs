@@ -52,3 +52,4 @@ export default function NoteList({ notes }: NoteListProps) {
     </ul>
   );
 }
+
