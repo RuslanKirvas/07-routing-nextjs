@@ -1,17 +1,11 @@
-
-
-
-'use client';
-
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
 import css from './Sidebar.module.css'
 
 const TAGS = ['All notes', 'Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
 
-export default function SidebarNotes() {
-  const params = useParams();
-  const slug = (params?.slug as string[]) || ['all'];
+export default async function SidebarNotes({ params }: { params: Promise<{ slug?: string[] }> }) {
+  const resolvedParams = await params;
+  const slug = resolvedParams.slug || ['all'];
   const currentTag = slug[0] === 'all' ? 'All notes' : slug[0];
 
   const getTagUrl = (tag: string) => {
