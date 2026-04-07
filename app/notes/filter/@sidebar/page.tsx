@@ -5,7 +5,7 @@
 
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import css from './SidebarNotes.module.css';
+import css from './Sidebar.module.css'
 
 const TAGS = ['All notes', 'Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
 
